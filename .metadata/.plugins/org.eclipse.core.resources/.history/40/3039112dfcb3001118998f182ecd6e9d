@@ -1,0 +1,40 @@
+package in.co.rays.proj4.util;
+
+import java.util.ResourceBundle;
+
+import com.mchange.v2.c3p0.ComboPooledDataSource;
+
+public final class JDBCDataSource {
+
+	private static final JDBCDataSource jdbc = null;
+	private static ComboPooledDataSource cpds = null;
+	
+	private static ResourceBundle rb =  ResourceBundle.getBundle("in.co.rays.proj4.bundle.System");
+
+	private JDBCDataSource() {
+		
+	cpds = new ComboPooledDataSource();
+	
+	try {
+		cpds.setMaxPoolSize(0);
+		cpds.setMinPoolSize(0);
+		cpds.setAcquireIncrement(0);
+		cpds.setInitialPoolSize(0);
+		
+	} catch (Exception e) {
+		e.getMessage()
+	}
+	
+
+	}
+
+	private static JDBCDataSource getInstance() {
+
+		if (jdbc == null) {
+
+			return new JDBCDataSource();
+		}
+		return jdbc;
+	}
+
+}

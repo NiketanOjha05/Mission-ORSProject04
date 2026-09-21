@@ -1,0 +1,99 @@
+package in.co.rays.proj4.model;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+
+import in.co.rays.proj4.bean.RoleBean;
+import in.co.rays.proj4.exception.ApplicationException;
+import in.co.rays.proj4.exception.DuplicateException;
+import in.co.rays.proj4.util.JDBCDataSource;
+
+public class RoleModel extends BaseModel<RoleBean> {
+
+	@Override
+	public long add(RoleBean Bean) throws ApplicationException, DuplicateException {
+		Connection conn = null;
+		int pk = 0;
+
+		try {
+			pk = nextPk();
+
+			conn = JDBCDataSource.getConnection();
+			conn.setAutoCommit(false);
+
+			PreparedStatement pstmt = conn.prepareStatement("insert into " + getTable() + " values(?,?,?,?,?,?,?)");
+			pstmt.setLong(1, pk);
+			pstmt.setString(2, Bean.getName());
+			pstmt.setString(3, Bean.getDescription());
+			pstmt.setString(4, Bean.getCreatedBy());
+			pstmt.setString(5, Bean.getModifiedBy());
+			pstmt.setTimestamp(6, Bean.getCreatedDatetime());
+			pstmt.setTimestamp(7, Bean.getModifiedDatetime());
+
+			int i = pstmt.executeUpdate();
+			conn.commit();
+			System.out.println("Record inserted Successfully : " + i);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			JDBCDataSource.rollBack(conn);
+
+		} finally {
+			JDBCDataSource.closeConnection(conn);
+		}
+		return pk;
+	}
+
+	@Override
+	public void update(RoleBean Bean) throws ApplicationException, DuplicateException {
+
+		Connection conn = null;
+
+		try {
+			conn = JDBCDataSource.getConnection();
+			conn.setAutoCommit(false);
+
+			PreparedStatement pstmt = conn.prepareStatement("update " + getTable()
+					+ " set name = ?, description = ?, created_By = ?, modified_By = ?, created_Datetime = ?, modified_Datetime = ? where id = ?");
+
+			pstmt.setString(1, Bean.getName());
+			pstmt.setString(2, Bean.getDescription());
+			pstmt.setString(3, Bean.getCreatedBy());
+			pstmt.setString(4, Bean.getModifiedBy());
+			pstmt.setTimestamp(5, Bean.getCreatedDatetime());
+			pstmt.setTimestamp(6, Bean.getModifiedDatetime());
+			pstmt.setLong(7, Bean.getId());
+
+			int i = pstmt.executeUpdate();
+			conn.commit();
+			System.out.println("record updated successfully : " + i);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			JDBCDataSource.rollBack(conn);
+
+		} finally {
+			JDBCDataSource.closeConnection(conn);
+		}
+
+	}
+
+	@Override
+	public String getWhereClause(RoleBean Bean) {
+
+		return null;
+	}
+
+	@Override
+	public String getTable() {
+
+		return "st_role";
+	}
+
+	@Override
+	public RoleBean getBean() {
+
+		return null;
+	}
+
+}

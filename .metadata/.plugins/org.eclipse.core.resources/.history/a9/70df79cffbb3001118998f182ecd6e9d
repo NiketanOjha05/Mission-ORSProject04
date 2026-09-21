@@ -1,0 +1,23 @@
+package in.co.rays.proj4.util;
+
+import com.mchange.v2.c3p0.ComboPooledDataSource;
+
+public final class JDBCDataSource {
+
+	private static final JDBCDataSource jdbc = null;
+	private static final ComboPooledDataSource cpds = null;
+
+	private JDBCDataSource() {
+
+	}
+
+	private static JDBCDataSource getInstance() {
+
+		if (jdbc == null) {
+
+			return new JDBCDataSource();
+		}
+		return jdbc;
+	}
+
+}

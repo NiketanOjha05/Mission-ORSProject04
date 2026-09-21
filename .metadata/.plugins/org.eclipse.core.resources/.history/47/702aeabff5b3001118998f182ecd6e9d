@@ -1,0 +1,11 @@
+package in.co.rays.proj4.bean;
+
+public class BaseBean  implements DropdownListBean {
+	
+	@Override
+	public String getKey() {
+		// TODO Auto-generated method stub
+		return id + "";
+	}
+
+}

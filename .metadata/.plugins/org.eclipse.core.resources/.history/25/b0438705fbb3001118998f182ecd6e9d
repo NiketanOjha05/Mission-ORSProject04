@@ -1,0 +1,20 @@
+package in.co.rays.proj4.util;
+
+public final class JDBCDataSource {
+
+	private static final JDBCDataSource jdbc = null;
+
+	private JDBCDataSource() {
+
+	}
+
+	private static JDBCDataSource getInstance() {
+
+		if (jdbc == null) {
+
+			return new JDBCDataSource();
+		}
+		return jdbc;
+	}
+
+}

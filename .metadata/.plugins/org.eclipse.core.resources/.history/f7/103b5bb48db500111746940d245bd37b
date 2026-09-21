@@ -1,0 +1,12 @@
+package in.co.rays.proj4.model;
+
+import in.co.rays.proj4.bean.BaseBean;
+import in.co.rays.proj4.exception.ApplicationException;
+import in.co.rays.proj4.exception.DuplicateException;
+
+public abstract class BaseModel<T extends BaseBean> {
+	
+	public abstract long add(T Bean) throws ApplicationException,DuplicateException;
+		
+		
+	}
