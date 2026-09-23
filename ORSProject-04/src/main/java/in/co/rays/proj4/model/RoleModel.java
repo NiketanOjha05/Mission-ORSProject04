@@ -11,7 +11,7 @@ import in.co.rays.proj4.util.JDBCDataSource;
 public class RoleModel extends BaseModel<RoleBean> {
 
 	@Override
-	public long add(RoleBean Bean) throws ApplicationException, DuplicateException {
+	public long add(RoleBean bean) throws ApplicationException, DuplicateException {
 		Connection conn = null;
 		int pk = 0;
 
@@ -23,12 +23,12 @@ public class RoleModel extends BaseModel<RoleBean> {
 
 			PreparedStatement pstmt = conn.prepareStatement("insert into " + getTable() + " values(?,?,?,?,?,?,?)");
 			pstmt.setLong(1, pk);
-			pstmt.setString(2, Bean.getName());
-			pstmt.setString(3, Bean.getDescription());
-			pstmt.setString(4, Bean.getCreatedBy());
-			pstmt.setString(5, Bean.getModifiedBy());
-			pstmt.setTimestamp(6, Bean.getCreatedDatetime());
-			pstmt.setTimestamp(7, Bean.getModifiedDatetime());
+			pstmt.setString(2, bean.getName());
+			pstmt.setString(3, bean.getDescription());
+			pstmt.setString(4, bean.getCreatedBy());
+			pstmt.setString(5, bean.getModifiedBy());
+			pstmt.setTimestamp(6, bean.getCreatedDatetime());
+			pstmt.setTimestamp(7, bean.getModifiedDatetime());
 
 			int i = pstmt.executeUpdate();
 			conn.commit();
@@ -45,7 +45,7 @@ public class RoleModel extends BaseModel<RoleBean> {
 	}
 
 	@Override
-	public void update(RoleBean Bean) throws ApplicationException, DuplicateException {
+	public void update(RoleBean bean) throws ApplicationException, DuplicateException {
 
 		Connection conn = null;
 
@@ -56,13 +56,13 @@ public class RoleModel extends BaseModel<RoleBean> {
 			PreparedStatement pstmt = conn.prepareStatement("update " + getTable()
 					+ " set name = ?, description = ?, created_By = ?, modified_By = ?, created_Datetime = ?, modified_Datetime = ? where id = ?");
 
-			pstmt.setString(1, Bean.getName());
-			pstmt.setString(2, Bean.getDescription());
-			pstmt.setString(3, Bean.getCreatedBy());
-			pstmt.setString(4, Bean.getModifiedBy());
-			pstmt.setTimestamp(5, Bean.getCreatedDatetime());
-			pstmt.setTimestamp(6, Bean.getModifiedDatetime());
-			pstmt.setLong(7, Bean.getId());
+			pstmt.setString(1, bean.getName());
+			pstmt.setString(2, bean.getDescription());
+			pstmt.setString(3, bean.getCreatedBy());
+			pstmt.setString(4, bean.getModifiedBy());
+			pstmt.setTimestamp(5, bean.getCreatedDatetime());
+			pstmt.setTimestamp(6, bean.getModifiedDatetime());
+			pstmt.setLong(7, bean.getId());
 
 			int i = pstmt.executeUpdate();
 			conn.commit();
@@ -79,9 +79,25 @@ public class RoleModel extends BaseModel<RoleBean> {
 	}
 
 	@Override
-	public String getWhereClause(RoleBean Bean) {
+	public String getWhereClause(RoleBean bean) {
 
-		return null;
+		StringBuffer sql = new StringBuffer("");
+
+		if (bean != null) {
+
+			if (bean.getId() > 0) {
+				sql.append("and id = " + bean.getId());
+			}
+			if (bean.getName() != null && bean.getName().length() > 0) {
+				sql.append("and name like '" + bean.getName() + "%'");
+			}
+			if (bean.getDescription() != null && bean.getDescription().length() > 0) {
+				sql.append("and description like '" + bean.getDescription() + "%'");
+			}
+
+		}
+
+		return sql.toString();
 	}
 
 	@Override

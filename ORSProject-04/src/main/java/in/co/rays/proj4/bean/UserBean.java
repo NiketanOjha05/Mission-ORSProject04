@@ -5,24 +5,23 @@ import java.util.Date;
 
 public class UserBean extends BaseBean {
 
-	private static final String INACTIVE = "Inactive";
-
 	private String firstName;
 	private String lastName;
 	private String login;
 	private String password;
-	private String confirmPassword;
 	private Date dob;
 	private String mobileNo;
 	private long roleId;
-	private int unSuccessfulLogin;
+	private int unsuccessfulLogin;
 	private String gender;
 	private Timestamp lastLogin;
-	private String lock = INACTIVE;
+	private String userLock;
 	private String registeredIP;
 	private String lastLoginIP;
 	private String createdBy;
 	private String modifiedBy;
+	private Timestamp createdDatetime;
+	private Timestamp modifiedDatetime;
 
 	public String getFirstName() {
 		return firstName;
@@ -56,14 +55,6 @@ public class UserBean extends BaseBean {
 		this.password = password;
 	}
 
-	public String getConfirmPassword() {
-		return confirmPassword;
-	}
-
-	public void setConfirmPassword(String confirmPassword) {
-		this.confirmPassword = confirmPassword;
-	}
-
 	public Date getDob() {
 		return dob;
 	}
@@ -88,12 +79,12 @@ public class UserBean extends BaseBean {
 		this.roleId = roleId;
 	}
 
-	public int getUnSuccessfulLogin() {
-		return unSuccessfulLogin;
+	public int getUnsuccessfulLogin() {
+		return unsuccessfulLogin;
 	}
 
-	public void setUnSuccessfulLogin(int unSuccessfulLogin) {
-		this.unSuccessfulLogin = unSuccessfulLogin;
+	public void setUnsuccessfulLogin(int unsuccessfulLogin) {
+		this.unsuccessfulLogin = unsuccessfulLogin;
 	}
 
 	public String getGender() {
@@ -112,12 +103,12 @@ public class UserBean extends BaseBean {
 		this.lastLogin = lastLogin;
 	}
 
-	public String getLock() {
-		return lock;
+	public String getUserLock() {
+		return userLock;
 	}
 
-	public void setLock(String lock) {
-		this.lock = lock;
+	public void setUserLock(String userLock) {
+		this.userLock = userLock;
 	}
 
 	public String getRegisteredIP() {
@@ -152,9 +143,25 @@ public class UserBean extends BaseBean {
 		this.modifiedBy = modifiedBy;
 	}
 
+	public Timestamp getCreatedDatetime() {
+		return createdDatetime;
+	}
+
+	public void setCreatedDatetime(Timestamp createdDatetime) {
+		this.createdDatetime = createdDatetime;
+	}
+
+	public Timestamp getModifiedDatetime() {
+		return modifiedDatetime;
+	}
+
+	public void setModifiedDatetime(Timestamp modifiedDatetime) {
+		this.modifiedDatetime = modifiedDatetime;
+	}
+
 	@Override
 	public String getValue() {
-		
+
 		return firstName + "" + lastName;
 	}
 
