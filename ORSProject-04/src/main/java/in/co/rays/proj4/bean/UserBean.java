@@ -1,5 +1,6 @@
 package in.co.rays.proj4.bean;
 
+import java.sql.ResultSet;
 import java.sql.Timestamp;
 import java.util.Date;
 
@@ -163,6 +164,31 @@ public class UserBean extends BaseBean {
 	public String getValue() {
 
 		return firstName + "" + lastName;
+
+	}
+
+	@Override
+	public void setResultSet(ResultSet rs) {
+
+		try {
+			setFirstName(rs.getString("first_name"));
+			setLastName(rs.getString("last_name"));
+			setLogin(rs.getString("login"));
+			setPassword(rs.getString("password"));
+			setDob(rs.getDate("dob"));
+			setMobileNo(rs.getString("mobile_no"));
+			setRoleId(rs.getLong("role_id"));
+			setUnsuccessfulLogin(rs.getInt("unsuccessful_login"));
+			setGender(rs.getString("gender"));
+			setLastLogin(rs.getTimestamp("last_login"));
+			setUserLock(rs.getString("user_lock"));
+			setRegisteredIP(rs.getString("registered_ip"));
+			setLastLoginIP(rs.getString("last_login_ip"));
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		super.setResultSet(rs);
 	}
 
 }

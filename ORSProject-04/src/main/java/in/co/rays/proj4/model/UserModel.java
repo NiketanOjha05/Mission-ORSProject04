@@ -5,13 +5,13 @@ import java.sql.PreparedStatement;
 
 import in.co.rays.proj4.bean.UserBean;
 import in.co.rays.proj4.exception.ApplicationException;
-import in.co.rays.proj4.exception.DuplicateException;
+import in.co.rays.proj4.exception.DuplicateRecordException;
 import in.co.rays.proj4.util.JDBCDataSource;
 
 public class UserModel extends BaseModel<UserBean> {
 
 	@Override
-	public long add(UserBean bean) throws ApplicationException, DuplicateException {
+	public long add(UserBean bean) throws ApplicationException, DuplicateRecordException {
 		Connection conn = null;
 		int pk = 0;
 
@@ -59,7 +59,7 @@ public class UserModel extends BaseModel<UserBean> {
 	}
 
 	@Override
-	public void update(UserBean bean) throws ApplicationException, DuplicateException {
+	public void update(UserBean bean) throws ApplicationException, DuplicateRecordException {
 
 		Connection conn = null;
 
@@ -118,9 +118,12 @@ public class UserModel extends BaseModel<UserBean> {
 			if (bean.getRoleId() > 0) {
 				sql.append(" and roleId = " + bean.getRoleId());
 			}
+			if (bean.getLogin() != null && bean.getLogin().length() > 0) {
+				sql.append(" and login like '" + bean.getLogin() + "%'");
+			}
 		}
 
-		return null;
+		return sql.toString();
 	}
 
 	@Override

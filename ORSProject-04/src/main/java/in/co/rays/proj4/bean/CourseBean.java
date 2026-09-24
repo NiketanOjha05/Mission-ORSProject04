@@ -2,11 +2,13 @@ package in.co.rays.proj4.bean;
 
 import java.sql.ResultSet;
 
-public class SubjectBean extends BaseBean {
+public class CourseBean extends BaseBean {
 
 	private String name;
+
 	private String description;
-	private long courseId;
+
+	private String duration;
 
 	public String getName() {
 		return name;
@@ -24,16 +26,17 @@ public class SubjectBean extends BaseBean {
 		this.description = description;
 	}
 
-	public long getCourseId() {
-		return courseId;
+	public String getDuration() {
+		return duration;
 	}
 
-	public void setCourseId(long courseId) {
-		this.courseId = courseId;
+	public void setDuration(String duration) {
+		this.duration = duration;
 	}
 
 	@Override
 	public String getValue() {
+
 		return name;
 	}
 
@@ -41,13 +44,13 @@ public class SubjectBean extends BaseBean {
 	public void setResultSet(ResultSet rs) {
 
 		try {
-
 			setName(rs.getString("name"));
 			setDescription(rs.getString("description"));
-			setCourseId(rs.getLong("course_id"));
+			setDuration(rs.getString("duration"));
 
 		} catch (Exception e) {
 			e.printStackTrace();
+
 		}
 		super.setResultSet(rs);
 	}

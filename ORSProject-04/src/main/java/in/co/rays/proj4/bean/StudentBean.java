@@ -1,12 +1,13 @@
 package in.co.rays.proj4.bean;
 
+import java.sql.ResultSet;
 import java.util.Date;
 
 public class StudentBean extends BaseBean {
 
 	private String firstName;
 	private String lastName;
-	private Date dob;
+	private Date dateOfBirth;
 	private String mobileNo;
 	private String email;
 	private long collegeId;
@@ -28,12 +29,12 @@ public class StudentBean extends BaseBean {
 		this.lastName = lastName;
 	}
 
-	public Date getDob() {
-		return dob;
+	public Date getDateOfBirth() {
+		return dateOfBirth;
 	}
 
-	public void setDob(Date dob) {
-		this.dob = dob;
+	public void setDateOfBirth(Date dateOfBirth) {
+		this.dateOfBirth = dateOfBirth;
 	}
 
 	public String getMobileNo() {
@@ -52,11 +53,11 @@ public class StudentBean extends BaseBean {
 		this.email = email;
 	}
 
-	public Long getCollegeId() {
+	public long getCollegeId() {
 		return collegeId;
 	}
 
-	public void setCollegeId(Long collegeId) {
+	public void setCollegeId(long collegeId) {
 		this.collegeId = collegeId;
 	}
 
@@ -72,6 +73,23 @@ public class StudentBean extends BaseBean {
 	public String getValue() {
 
 		return firstName + " " + lastName;
+	}
+
+	@Override
+	public void setResultSet(ResultSet rs) {
+		try {
+			setFirstName(rs.getString("first_name"));
+			setLastName(rs.getString("last_name"));
+			setDateOfBirth(rs.getDate("date_of_birth"));
+			setMobileNo(rs.getString("mobile_no"));
+			setEmail(rs.getString("email"));
+			setCollegeId(rs.getLong("college_id"));
+			setCollegeName(rs.getString("college_name"));
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		super.setResultSet(rs);
 	}
 
 }

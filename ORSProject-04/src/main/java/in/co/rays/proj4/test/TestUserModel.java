@@ -17,10 +17,10 @@ public class TestUserModel {
 
 	public static void main(String[] args) throws ParseException {
 
-		testAdd();
+//		testAdd();
 //		testUpdate();
 //		testDelete();
-//		testfindByPk();
+		testfindByPk();
 //		testSearch();
 
 	}
@@ -29,24 +29,23 @@ public class TestUserModel {
 
 		UserBean bean = new UserBean();
 
-		bean.setFirstName("Nirmal");
-		bean.setLastName("Fayake");
-		bean.setLogin("nirmal@gmail.com");
-		bean.setPassword("nirmal123");
-		bean.setDob(sdf.parse("2000-12-10"));
-		bean.setMobileNo("9010101010");
-		bean.setRoleId(1);
+		bean.setFirstName("Nisha");
+		bean.setLastName("Pandey");
+		bean.setLogin("nisha@gmail.com");
+		bean.setPassword("nisha123");
+		bean.setDob(sdf.parse("2001-12-16"));
+		bean.setMobileNo("7953146280");
+		bean.setRoleId(2);
 		bean.setUnsuccessfulLogin(1);
-		bean.setGender("Male");
+		bean.setGender("Female");
 		bean.setLastLogin(new Timestamp(new Date().getTime()));
 		bean.setUserLock("Inactive");
-		bean.setRegisteredIP("10.0.0.1");
-		bean.setLastLoginIP("10.0.0.10");
+		bean.setRegisteredIP("10.0.0.40");
+		bean.setLastLoginIP("10.0.0.50");
 		bean.setCreatedBy("Niketan");
 		bean.setModifiedBy("Niketan");
 		bean.setCreatedDatetime(new Timestamp(new Date().getTime()));
 		bean.setModifiedDatetime(new Timestamp(new Date().getTime()));
-
 		model.add(bean);
 	}
 
@@ -91,7 +90,7 @@ public class TestUserModel {
 		System.out.println(bean.getLastName());
 		System.out.println(bean.getLogin());
 		System.out.println(bean.getPassword());
-		System.out.println(bean.getDob().getTime());
+		System.out.println(bean.getDob());
 		System.out.println(bean.getMobileNo());
 		System.out.println(bean.getRoleId());
 		System.out.println(bean.getUnsuccessfulLogin());

@@ -1,10 +1,11 @@
 package in.co.rays.proj4.bean;
 
+import java.sql.ResultSet;
 import java.util.Date;
 
 public class FacultyBean extends BaseBean {
 
-	private String collageId;
+	private long collegeId;
 	private String collegeName;
 	private String firstName;
 	private String lastName;
@@ -12,14 +13,14 @@ public class FacultyBean extends BaseBean {
 	private String mobileNo;
 	private String address;
 	private String gender;
-	private Date dob;
+	private Date dateOfBirth;
 
-	public String getCollageId() {
-		return collageId;
+	public long getCollegeId() {
+		return collegeId;
 	}
 
-	public void setCollageId(String collageId) {
-		this.collageId = collageId;
+	public void setCollegeId(long collegeId) {
+		this.collegeId = collegeId;
 	}
 
 	public String getCollegeName() {
@@ -78,17 +79,37 @@ public class FacultyBean extends BaseBean {
 		this.gender = gender;
 	}
 
-	public Date getDob() {
-		return dob;
+	public Date getDateOfBirth() {
+		return dateOfBirth;
 	}
 
-	public void setDob(Date dob) {
-		this.dob = dob;
+	public void setDateOfBirth(Date dateOfBirth) {
+		this.dateOfBirth = dateOfBirth;
 	}
 
 	@Override
 	public String getValue() {
 		return firstName + " " + lastName;
+	}
+
+	@Override
+	public void setResultSet(ResultSet rs) {
+
+		try {
+			setFirstName(rs.getString("first_name"));
+			setLastName(rs.getString("last_name"));
+			setCollegeName(rs.getString("college_name"));
+			setEmail(rs.getString("email"));
+			setMobileNo(rs.getString("mobile_no"));
+			setAddress(rs.getString("address"));
+			setGender(rs.getString("gender"));
+			setDateOfBirth(rs.getDate("date_of_birth"));
+
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		}
+		super.setResultSet(rs);
 	}
 
 }

@@ -5,81 +5,82 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
-import in.co.rays.proj4.bean.RoleBean;
-import in.co.rays.proj4.model.RoleModel;
+import in.co.rays.proj4.bean.CourseBean;
+import in.co.rays.proj4.model.CourseModel;
 
-public class TestRoleModel {
+public class TestCourseModel {
 
-	public static RoleModel model = new RoleModel();
+	public static CourseModel model = new CourseModel();
 
 	public static void main(String[] args) {
 
 //		testAdd();
 //		testUpdate();
-//		testDelete;
-//		testfindByPk();
-		testSearch();
+//		testDelete();
+		testfindByPk();
+//		testSearch();
+
 	}
 
 	private static void testAdd() {
 
-		RoleBean Bean = new RoleBean();
+		CourseBean bean = new CourseBean();
 
-		Bean.setName("KIOSK");
-		Bean.setDescription("kiosk role");
-		Bean.setCreatedBy("Niketan");
-		Bean.setModifiedBy("Niketan");
-		Bean.setCreatedDatetime(new Timestamp(new Date().getTime()));
-		Bean.setModifiedDatetime(new Timestamp(new Date().getTime()));
+		bean.setName("Java Programming");
+		bean.setDescription("Core Java and OOP concepts");
+		bean.setDuration("6 Months");
+		bean.setCreatedBy("Niketan");
+		bean.setModifiedBy("Niketan");
+		bean.setCreatedDatetime(new Timestamp(new Date().getTime()));
+		bean.setModifiedDatetime(new Timestamp(new Date().getTime()));
 
-		model.add(Bean);
-
+		model.add(bean);
 	}
 
 	private static void testUpdate() {
 
-		RoleBean bean = new RoleBean();
+		CourseBean bean = new CourseBean();
 
-		bean.setId(5);
-		bean.setName("KIOSK");
-		bean.setDescription("KIOSK role");
+		bean.setId(11);
+		bean.setName("Phython Programming");
+		bean.setDescription("Core Java and OOP concepts");
+		bean.setDuration("6 Months");
 		bean.setCreatedBy("Niketan");
 		bean.setModifiedBy("Niketan");
 		bean.setCreatedDatetime(new Timestamp(new Date().getTime()));
 		bean.setModifiedDatetime(new Timestamp(new Date().getTime()));
 
 		model.update(bean);
-
 	}
 
 	private static void testDelete() {
 
-		model.delete(1);
+		model.delete(11);
 
 	}
 
 	private static void testfindByPk() {
 
-		RoleBean bean = model.findByPk(1);
+		CourseBean bean = model.findByPk(1);
 
 		System.out.println(bean.getId());
 		System.out.println(bean.getName());
 		System.out.println(bean.getDescription());
+		System.out.println(bean.getDuration());
 		System.out.println(bean.getCreatedBy());
 		System.out.println(bean.getModifiedBy());
 		System.out.println(bean.getCreatedDatetime());
-		System.out.println(bean.getModifiedDatetime());
+		System.out.println(bean.getModifiedBy());
+
 	}
 
 	private static void testSearch() {
 
-		RoleBean bean = new RoleBean();
+		CourseBean bean = new CourseBean();
 
-//		bean.setName("Admin");
+		List<CourseBean> list = model.search(bean, 1, 5);
 
-		List<RoleBean> list = model.search(bean, 1, 5);
-
-		Iterator<RoleBean> it = list.iterator();
+		Iterator<CourseBean> it = list.iterator();
 
 		while (it.hasNext()) {
 			bean = it.next();
@@ -87,6 +88,7 @@ public class TestRoleModel {
 			System.out.println(bean.getId());
 			System.out.println(bean.getName());
 			System.out.println(bean.getDescription());
+			System.out.println(bean.getDuration());
 			System.out.println(bean.getCreatedBy());
 			System.out.println(bean.getModifiedBy());
 			System.out.println(bean.getCreatedDatetime());
@@ -95,5 +97,4 @@ public class TestRoleModel {
 		}
 
 	}
-
 }

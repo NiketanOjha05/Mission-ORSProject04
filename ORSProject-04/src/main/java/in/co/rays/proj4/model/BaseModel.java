@@ -10,14 +10,14 @@ import java.util.List;
 import in.co.rays.proj4.bean.BaseBean;
 import in.co.rays.proj4.exception.ApplicationException;
 import in.co.rays.proj4.exception.DatabaseException;
-import in.co.rays.proj4.exception.DuplicateException;
+import in.co.rays.proj4.exception.DuplicateRecordException;
 import in.co.rays.proj4.util.JDBCDataSource;
 
 public abstract class BaseModel<T extends BaseBean> {
 
-	public abstract long add(T bean) throws ApplicationException, DuplicateException;
+	public abstract long add(T bean) throws ApplicationException, DuplicateRecordException;
 
-	public abstract void update(T bean) throws ApplicationException, DuplicateException;
+	public abstract void update(T bean) throws ApplicationException, DuplicateRecordException;
 
 	public abstract String getWhereClause(T bean);
 

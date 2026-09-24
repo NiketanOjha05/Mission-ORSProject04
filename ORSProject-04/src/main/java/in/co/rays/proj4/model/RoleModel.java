@@ -5,13 +5,13 @@ import java.sql.PreparedStatement;
 
 import in.co.rays.proj4.bean.RoleBean;
 import in.co.rays.proj4.exception.ApplicationException;
-import in.co.rays.proj4.exception.DuplicateException;
+import in.co.rays.proj4.exception.DuplicateRecordException;
 import in.co.rays.proj4.util.JDBCDataSource;
 
 public class RoleModel extends BaseModel<RoleBean> {
 
 	@Override
-	public long add(RoleBean bean) throws ApplicationException, DuplicateException {
+	public long add(RoleBean bean) throws ApplicationException, DuplicateRecordException {
 		Connection conn = null;
 		int pk = 0;
 
@@ -45,7 +45,7 @@ public class RoleModel extends BaseModel<RoleBean> {
 	}
 
 	@Override
-	public void update(RoleBean bean) throws ApplicationException, DuplicateException {
+	public void update(RoleBean bean) throws ApplicationException, DuplicateRecordException {
 
 		Connection conn = null;
 
