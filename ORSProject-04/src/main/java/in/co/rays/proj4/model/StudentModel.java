@@ -16,6 +16,13 @@ public class StudentModel extends BaseModel<StudentBean> {
 		Connection conn = null;
 		int pk = 0;
 
+		StudentBean existBean = findByEmail(bean.getEmail());
+
+		if (existBean != null) {
+			throw new DuplicateRecordException("Student Already Exist");
+
+		}
+
 		try {
 
 			pk = nextPk();
@@ -130,6 +137,13 @@ public class StudentModel extends BaseModel<StudentBean> {
 		}
 
 		return sql.toString();
+	}
+
+	public StudentBean findByEmail(String email) {
+
+		StudentBean bean = findByUniqueColumn("email", email);
+
+		return bean;
 	}
 
 	@Override

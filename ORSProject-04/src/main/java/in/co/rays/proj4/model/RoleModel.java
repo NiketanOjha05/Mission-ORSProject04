@@ -13,7 +13,15 @@ public class RoleModel extends BaseModel<RoleBean> {
 	@Override
 	public long add(RoleBean bean) throws ApplicationException, DuplicateRecordException {
 		Connection conn = null;
+
 		int pk = 0;
+
+		RoleBean existBean = findByName(bean.getName());
+
+		if (existBean != null) {
+			throw new DuplicateRecordException("Role Name Already Exist");
+
+		}
 
 		try {
 			pk = nextPk();
@@ -98,6 +106,14 @@ public class RoleModel extends BaseModel<RoleBean> {
 		}
 
 		return sql.toString();
+	}
+
+	public RoleBean findByName(String name) {
+
+		RoleBean bean = findByUniqueColumn("name", name);
+
+		return bean;
+
 	}
 
 	@Override

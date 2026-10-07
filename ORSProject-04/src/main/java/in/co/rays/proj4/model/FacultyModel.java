@@ -16,6 +16,13 @@ public class FacultyModel extends BaseModel<FacultyBean> {
 		Connection conn = null;
 		int pk = 0;
 
+		FacultyBean existBean = findByEmail(bean.getEmail());
+
+		if (existBean != null) {
+			throw new DuplicateRecordException("Faculty Name Already Exist");
+
+		}
+
 		try {
 
 			pk = nextPk();
@@ -141,6 +148,14 @@ public class FacultyModel extends BaseModel<FacultyBean> {
 		}
 
 		return sql.toString();
+	}
+
+	public FacultyBean findByEmail(String email) {
+
+		FacultyBean bean = findByUniqueColumn("email", email);
+
+		return bean;
+
 	}
 
 	@Override

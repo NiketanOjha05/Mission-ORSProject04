@@ -14,11 +14,11 @@ public class TestMarksheetModel {
 
 	public static void main(String[] args) {
 
-//		testAdd();
+		testAdd();
 //		testUpdate();
 //		testDelete();
 //		testFindBypk();
-		testSearch();
+//		testSearch();
 
 	}
 
@@ -26,15 +26,14 @@ public class TestMarksheetModel {
 
 		MarksheetBean bean = new MarksheetBean();
 
-		bean.setId(0);
-		bean.setRollNo("");
-		bean.setStudentId(0);
-		bean.setName("");
-		bean.setPhysics(0);
-		bean.setChemistry(0);
-		bean.setMaths(0);
-		bean.setCreatedBy("");
-		bean.setModifiedBy("");
+		bean.setRollNo("ab");
+		bean.setStudentId(2);
+		bean.setName("gftyfy");
+		bean.setPhysics(68);
+		bean.setChemistry(76);
+		bean.setMaths(80);
+		bean.setCreatedBy("uy");
+		bean.setModifiedBy("gh");
 		bean.setCreatedDatetime(new Timestamp(new Date().getTime()));
 		bean.setModifiedDatetime(new Timestamp(new Date().getTime()));
 

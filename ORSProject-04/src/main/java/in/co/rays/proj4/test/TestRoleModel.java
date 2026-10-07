@@ -14,11 +14,11 @@ public class TestRoleModel {
 
 	public static void main(String[] args) {
 
-//		testAdd();
+		testAdd();
 //		testUpdate();
 //		testDelete;
 //		testfindByPk();
-		testSearch();
+//		testSearch();
 	}
 
 	private static void testAdd() {

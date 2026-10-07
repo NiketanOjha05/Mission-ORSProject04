@@ -17,10 +17,10 @@ public class TestUserModel {
 
 	public static void main(String[] args) throws ParseException {
 
-//		testAdd();
+		testAdd();
 //		testUpdate();
 //		testDelete();
-		testfindByPk();
+//		testfindByPk();
 //		testSearch();
 
 	}

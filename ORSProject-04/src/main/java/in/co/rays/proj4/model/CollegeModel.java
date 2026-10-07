@@ -16,6 +16,13 @@ public class CollegeModel extends BaseModel<CollegeBean> {
 		Connection conn = null;
 		int pk = 0;
 
+		CollegeBean existBean = findByName(bean.getName());
+
+		if (existBean != null) {
+
+			throw new DuplicateRecordException("College name already exist");
+		}
+
 		try {
 			pk = nextPk();
 
@@ -111,6 +118,13 @@ public class CollegeModel extends BaseModel<CollegeBean> {
 		}
 
 		return sql.toString();
+	}
+
+	public CollegeBean findByName(String name) {
+
+		CollegeBean bean = findByUniqueColumn("name", name);
+
+		return bean;
 	}
 
 	@Override

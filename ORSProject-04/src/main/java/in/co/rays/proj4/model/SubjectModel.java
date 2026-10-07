@@ -16,6 +16,13 @@ public class SubjectModel extends BaseModel<SubjectBean> {
 		Connection conn = null;
 		int pk = 0;
 
+		SubjectBean existBean = findByName(bean.getName());
+
+		if (existBean != null) {
+			throw new DuplicateRecordException("Subject Already Exist");
+
+		}
+
 		try {
 
 			pk = nextPk();
@@ -25,7 +32,7 @@ public class SubjectModel extends BaseModel<SubjectBean> {
 
 			PreparedStatement pstmt = conn.prepareStatement("insert into " + getTable() + " values(?,?,?,?,?,?,?,?)");
 
-			pstmt.setLong(1, pk);
+			pstmt.setLong(1, bean.getId());
 			pstmt.setString(2, bean.getName());
 			pstmt.setString(3, bean.getDescription());
 			pstmt.setLong(4, bean.getCourseId());
@@ -115,6 +122,14 @@ public class SubjectModel extends BaseModel<SubjectBean> {
 		}
 
 		return sql.toString();
+	}
+
+	public SubjectBean findByName(String name) {
+
+		SubjectBean bean = findByUniqueColumn("name", name);
+
+		return bean;
+
 	}
 
 	@Override

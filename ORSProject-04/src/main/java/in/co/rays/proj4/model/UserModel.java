@@ -15,6 +15,11 @@ public class UserModel extends BaseModel<UserBean> {
 		Connection conn = null;
 		int pk = 0;
 
+		UserBean existBean = findByLogin(bean.getLogin());
+		if (existBean != null) {
+			throw new DuplicateRecordException("Email id Already exist");
+		}
+
 		try {
 			pk = nextPk();
 
@@ -55,7 +60,7 @@ public class UserModel extends BaseModel<UserBean> {
 			JDBCDataSource.closeConnection(conn);
 		}
 
-		return 0;
+		return pk;
 	}
 
 	@Override
@@ -124,6 +129,27 @@ public class UserModel extends BaseModel<UserBean> {
 		}
 
 		return sql.toString();
+	}
+
+	public UserBean findByLogin(String login) {
+
+		System.out.println("findByLogin ke andar " + login);
+
+		UserBean bean = findByUniqueColumn("login", login);
+
+		return bean;
+	}
+
+	public UserBean authenticate(String login, String password) {
+
+		UserBean bean = findByLogin(login);
+
+		if (bean != null && bean.getPassword().equals(password)) {
+
+			return bean;
+		}
+		return null;
+
 	}
 
 	@Override

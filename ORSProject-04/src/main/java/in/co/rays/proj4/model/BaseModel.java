@@ -32,7 +32,7 @@ public abstract class BaseModel<T extends BaseBean> {
 
 		try {
 			conn = JDBCDataSource.getConnection();
-			PreparedStatement pstmt = conn.prepareStatement("SELECT MAX(ID) FROM " + getTable());
+			PreparedStatement pstmt = conn.prepareStatement("SELECT MAX(id) FROM " + getTable());
 			ResultSet rs = pstmt.executeQuery();
 
 			while (rs.next()) {
@@ -41,8 +41,9 @@ public abstract class BaseModel<T extends BaseBean> {
 			rs.close();
 
 		} catch (SQLException e) {
+			e.printStackTrace();
 
-			throw new DatabaseException("Exception : Exception in getting PK");
+//			throw new DatabaseException("Exception : Exception in getting PK");
 
 		} finally {
 			JDBCDataSource.closeConnection(conn);
@@ -136,6 +137,37 @@ public abstract class BaseModel<T extends BaseBean> {
 			JDBCDataSource.closeConnection(conn);
 		}
 		return list;
+	}
+
+	public T findByUniqueColumn(String column, String value) {
+
+		Connection conn = null;
+		T bean = null;
+
+		try {
+			conn = JDBCDataSource.getConnection();
+			conn.setAutoCommit(false);
+
+			PreparedStatement pstmt = conn
+					.prepareStatement("select * from " + getTable() + " where " + column + " = ?");
+			pstmt.setString(1, value);
+
+			// System.out.println(column + " " + value);
+
+			ResultSet rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				bean = getBean();
+				bean.setResultSet(rs);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCDataSource.closeConnection(conn);
+
+		}
+		return bean;
 	}
 
 }

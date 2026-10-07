@@ -14,7 +14,7 @@ public class TestSubjectModel {
 
 	public static void main(String[] args) {
 
-//		testAdd();
+		testAdd();
 //		testUpdate();
 //		testDelete();
 //		testFindByPk();
@@ -26,12 +26,12 @@ public class TestSubjectModel {
 
 		SubjectBean bean = new SubjectBean();
 
-		bean.setId(0);
-		bean.setName("");
-		bean.setDescription("");
-		bean.setCourseId(0);
-		bean.setCreatedBy("");
-		bean.setModifiedBy("");
+		bean.setId(5);
+		bean.setName("'Financial Managemen");
+		bean.setDescription("Financial planning and management");
+		bean.setCourseId(2);
+		bean.setCreatedBy("Niketan");
+		bean.setModifiedBy("Niketan");
 		bean.setCreatedDatetime(new Timestamp(new Date().getTime()));
 		bean.setModifiedDatetime(new Timestamp(new Date().getTime()));
 

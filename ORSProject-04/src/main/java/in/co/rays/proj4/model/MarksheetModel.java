@@ -16,6 +16,13 @@ public class MarksheetModel extends BaseModel<MarksheetBean> {
 		Connection conn = null;
 		int pk = 0;
 
+		MarksheetBean existBean = findByRollNo(bean.getRollNo());
+
+		if (existBean != null) {
+			throw new DuplicateRecordException("RollNo Already Exist");
+
+		}
+
 		try {
 
 			pk = nextPk();
@@ -54,7 +61,7 @@ public class MarksheetModel extends BaseModel<MarksheetBean> {
 			JDBCDataSource.closeConnection(conn);
 		}
 
-		return pk;
+		return 0;
 	}
 
 	@Override
@@ -130,6 +137,13 @@ public class MarksheetModel extends BaseModel<MarksheetBean> {
 		}
 
 		return sql.toString();
+	}
+
+	public MarksheetBean findByRollNo(String RollNo) {
+
+		MarksheetBean bean = findByUniqueColumn("RollNo", RollNo);
+
+		return bean;
 	}
 
 	@Override
